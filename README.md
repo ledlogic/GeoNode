@@ -15,6 +15,9 @@ Learnings
 
 * Mongo shell commands: http://docs.mongodb.org/manual/reference/mongo-shell/
 * Building 2d sphere index: http://docs.mongodb.org/manual/tutorial/build-a-2dsphere-index/
+* From http://stackoverflow.com/questions/25150590/mongoerror-cant-extract-geo-keys-from-object-with-type-point
+* Mongo coords are "longitude, latitude".  We'll call these the mcoords
+* Google coords are "latitude, longitude".  We'll call these the gcoords.
 
 ### Node
 
@@ -26,6 +29,16 @@ Learnings
 
 Commands
 --------
+
+### Mongo
+* use geoevents
+* coll = db.users
+* coll.find()
+* coll.remove([{login:"user0"},{login:"user1"}])
+
+* coll = db.places
+* coll.find()
+* coll.remove({"createdBy":"user1"})
 
 ### Users
 

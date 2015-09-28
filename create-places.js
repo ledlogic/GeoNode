@@ -37,7 +37,7 @@ var places = {
     var places = [
       {
         createdBy: "user1",
-        coords: [44.962613, -92.718213],
+        gcoords: [44.962613, -92.718213],
         category: "Medical",
         
         name: "Hudson Hospitals & Clinics",
@@ -50,7 +50,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [44.917862, -92.979873],
+        gcoords: [44.917862, -92.979873],
         category: "Medical",
         
         name: "Woodwinds Health Campus",
@@ -63,7 +63,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [44.955671, -93.094731],
+        gcoords: [44.955671, -93.094731],
         category: "Medical",
         
         name: "Regions Hospital",
@@ -76,7 +76,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [44.942301, -93.109320],
+        gcoords: [44.942301, -93.109320],
         category: "Medical",
         
         name: "Childrens Hospital & Clinics",
@@ -89,7 +89,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [44.942301, -93.109320],
+        gcoords: [44.942301, -93.109320],
         category: "Medical",
         
         name: "Roberts Medical Clinic",
@@ -102,7 +102,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [44.971595, -92.374086],
+        gcoords: [44.971595, -92.374086],
         category: "Medical",
         
         name: "Baldwin Area Medical Center",
@@ -115,11 +115,10 @@ var places = {
       },
       {
         createdBy: "user1",
-        coords: [45.108707, -92.545359],
+        gcoords: [45.108707, -92.545359],
         category: "Assisted Living",
         
-        shortName: "Our House Senior Living",
-        fullName: "Our House Senior Living",
+        name: "Our House Senior Living",
         street: "1310 Circle Pine Dr",
         city: "New Richmond",
         state: "WI",
@@ -128,6 +127,15 @@ var places = {
         website: "http://ourhousesl.com/"
       }
     ];
+    
+    // @see http://stackoverflow.com/questions/25150590/mongoerror-cant-extract-geo-keys-from-object-with-type-point
+    console.log('Transposing coords for mongo...');
+    places.forEach(function (e) {
+      e.mcoords = [ // Swapping Lat/Lon
+        e.gcoords[1], // Longitude goes first
+        e.gcoords[0] // Latitude goes last
+      ];
+    });
     
     // Insert places
     console.log('Inserting places...');
@@ -138,6 +146,13 @@ var places = {
         console.log("Success inserting", result.result.n, "into the 'places' collection.");
         console.log("results", result);
       }
+      
+      // create the index
+      collection.createIndex({
+        mcoords: "2dsphere",
+        category: 1,
+        name: 1
+      });
       
       createCallback(db);
     });
