@@ -89,7 +89,7 @@ var places = {
       },
       {
         createdBy: "user1",
-        gcoords: [44.942301, -93.109320],
+        gcoords: [44.978551, -92.556714],
         category: "Medical",
         
         name: "Roberts Medical Clinic",
@@ -128,13 +128,13 @@ var places = {
       }
     ];
     
+    // use gcoords to build a "loc" field.
+    // @see http://docs.mongodb.org/manual/tutorial/build-a-2dsphere-index/
     // @see http://stackoverflow.com/questions/25150590/mongoerror-cant-extract-geo-keys-from-object-with-type-point
-    console.log('Transposing coords for mongo...');
+    console.log('Building loc field/transposing coords for mongo...');
     places.forEach(function (e) {
-      e.mcoords = [ // Swapping Lat/Lon
-        e.gcoords[1], // Longitude goes first
-        e.gcoords[0] // Latitude goes last
-      ];
+      var mcoords = [e.gcoords[1], e.gcoords[0]];
+      e.loc = {type: "Point", coordinates: mcoords};
     });
     
     // Insert places
@@ -149,9 +149,7 @@ var places = {
       
       // create the index
       collection.createIndex({
-        mcoords: "2dsphere",
-        category: 1,
-        name: 1
+        loc: "2dsphere",
       });
       
       createCallback(db);

@@ -18,6 +18,7 @@ Learnings
 * From http://stackoverflow.com/questions/25150590/mongoerror-cant-extract-geo-keys-from-object-with-type-point
 * Mongo coords are "longitude, latitude".  We'll call these the mcoords
 * Google coords are "latitude, longitude".  We'll call these the gcoords.
+* Returns distance results in radians, not meters: http://docs.mongodb.org/manual/tutorial/calculate-distances-using-spherical-geometry-with-2d-geospatial-indexes/
 
 ### Node
 
@@ -39,6 +40,8 @@ Commands
 * coll = db.places
 * coll.find()
 * coll.remove({"createdBy":"user1"})
+* coll.dropIndexes()
+* coll.reIndex()
 
 ### Users
 
@@ -49,3 +52,4 @@ Commands
 
 * node create-places.js
 * node query-places.js
+* node query-closest-places.js
