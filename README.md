@@ -16,9 +16,9 @@ Learnings
 * Mongo shell commands: http://docs.mongodb.org/manual/reference/mongo-shell/
 * Building 2d sphere index: http://docs.mongodb.org/manual/tutorial/build-a-2dsphere-index/
 * From http://stackoverflow.com/questions/25150590/mongoerror-cant-extract-geo-keys-from-object-with-type-point
-* Mongo coords are "longitude, latitude".  We'll call these the mcoords
-* Google coords are "latitude, longitude".  We'll call these the gcoords.
-* Returns distance results in radians, not meters: http://docs.mongodb.org/manual/tutorial/calculate-distances-using-spherical-geometry-with-2d-geospatial-indexes/
+* Google coords are "latitude, longitude".  We'll call these the gcoords.  If you go to google maps your data will be in this ordering.
+* Mongo coords are "longitude, latitude".  We'll call these the mcoords.  Queries and results are in these coordinates, which would not map well in Google Maps.
+* If you do not prescribe everything, both data, and query using Point (2d spatial type), then it will returns distance results in radians, not meters: http://docs.mongodb.org/manual/tutorial/calculate-distances-using-spherical-geometry-with-2d-geospatial-indexes/
 
 ### Node
 
