@@ -8,7 +8,7 @@ Setup
 
 * Setup a node.js/Mongodb project: http://blog.modulus.io/mongodb-tutorial
 
-Learnings
+References
 ---------
 
 ### Mongo
@@ -27,6 +27,17 @@ Learnings
 ### Mongo-Node Driver
 
 * Db Commands https://mongodb.github.io/node-mongodb-native/api-generated/db.html
+* npm install mongodb
+
+### Request
+
+* https://github.com/request/request
+* npm install request
+
+### Google
+
+* Places API: https://developers.google.com/places/web-service/search
+* Create API key, add to "config.js", not committed to git for security.
 
 Commands
 --------
@@ -53,3 +64,4 @@ Commands
 * node create-places.js
 * node query-places.js
 * node query-closest-places.js
+* node query-google-places.js
